@@ -66,6 +66,18 @@
 					<special-small>I like infosec, video games, and cats!</special-small>
 				</section>
 
+				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
+					<h2>Overview</h2>
+					<ol>
+						<li>Motivation</li>
+						<li>Design & Security</li>
+						<li>Authentication</li>
+						<li>HTTP vs HTTPS</li>
+						<li>Databases & Servers</li>
+						<li>My Embarassing Past</li>
+					</ol>
+				</section>
+
 				<!-- Who is this talk for? -->
 				<section>
 						<h2>Who is this talk for?</h2>
@@ -111,6 +123,9 @@
 							<br>Adding these features would make sharing very dangerous
 							<br>and a leak could release location data or images of dog owners in the city.</p>
 					</section>
+					<section>
+						<h2>Design influences security.</h2>
+					</section>
 				</section>
 
 				<!-- Technology Section -->
@@ -120,10 +135,17 @@
 
 				<section>
 					<section>
-					<h2>Authentication</h2>
-					<p>This means usernames and passwords.</p>
+						<h2>Authentication</h2>
+						<p>User info so the app can "remember" you.</p>
+						<special-small-neg>
+							This means the app will store account data. If you don't need to "remember" you don't need auth.
+						</special-small-neg>
+						<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
+					</section>
+					<section>
+					<h2>Usernames and Passwords</h2>
+					<p>Most auth packages will use an email and a user defined password. Emails allow for a smooth reset process.</p>
 					<p><special-small>Passwords should be <b>hashed</b> and <b>salted</b> before they're stored in your database.</special-small></p>
-					<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
 					</section>
 					<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
 						<h2>Hashing</h2>
@@ -151,7 +173,11 @@
 						<footer><small>*Referenced from <a href="https://crackstation.net/hashing-security.htm">Crackstation.net</a></small></footer>
 					</section>
 					<section>
-
+						<h2>In reality</h2>
+						<p>It's good to know how auth works, but I would advise against writing your own system if it's your first app. Lots of frameworks handle auth for you, so you can configure it to your needs.</p>
+						<special-small>
+						<p>Most importantly, read the documentation and know how the system works!</p>
+						</special-small>
 					</section>
 				</section>
 
@@ -170,6 +196,11 @@
 						<special-small-neg>location data, credit card numbers, passwords.</special-small-neg></p>
 						<img src="./img/nicki_makeup.gif" alt="i'm an optical illusion">
 					</section>
+					<section>
+						<h4>Cut down on the information you store</h4>
+							<p>Avoid storing birthdays, SINs, ages, gender, and anything else you don't <emp-neg>need</emp-neg>.</p>
+							<img src="./img/nicki_nope.gif" alt="clef">
+					</section>
 				</section>
 
 				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
@@ -179,11 +210,6 @@
 						<p><special-small>If users do not need to login to your app, you don't need a server. 
 						</special-small></p>
 						<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
-					</section>
-					<section>
-						<h4>Cut down on the information you store</h4>
-							<p>Avoid storing birthdays, SINs, ages, gender, and anything else you don't <emp-neg>need</emp-neg>.</p>
-							<img src="./img/nicki_nope.gif" alt="clef">
 					</section>
 					<section>
 						<h2>Managing a server</h2>
@@ -211,6 +237,18 @@
 					<section>
 						<h2>But if you do...</h2>
 						<emp>Change them!</emp>
+					</section>
+					<section>
+						<h2>When you get hacked, don't panic.</h2>
+						<p>Honestly, it happens. The more you understand, the more you're protected.</p>
+					</section>
+					<section data-transition="slide" data-background="#BEE1F1" data-background-transition="zoom">
+						<h2>Sometimes databases get dumped.</h2>
+						<p>Having salted passwords helps protect users, but all their other info will be exposed in the dump.</p>
+						<img src="./img/nicki_sassy.gif" alt="clef">
+					</section>
+					<section>
+						<h2>Knowledge is power.</h2>
 					</section>
 				</section>
 
