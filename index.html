@@ -73,7 +73,7 @@
 						<li>Design & Security</li>
 						<li>Authentication</li>
 						<li>HTTP vs HTTPS</li>
-						<li>Databases & Servers</li>
+						<li>Servers & Databases</li>
 						<li>My Embarassing Past</li>
 					</ol>
 				</section>
@@ -205,10 +205,11 @@
 
 				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
 					<section>
-						<h2>Storing User Data</h2>
-						<p>Lets talk about servers.</p>
-						<p><special-small>If users do not need to login to your app, you don't need a server. 
-						</special-small></p>
+						<h2>Servers & Databases</h2>
+						<p>The server is like the bank building, <br>
+						the database is like the vault.</p>
+						<p><special-small>If users do not need to login to your app, you don't need a server. </special-small></p>
+						<p></p>
 						<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
 					</section>
 					<section>
@@ -224,7 +225,18 @@
 					<section>
 						<h2>Access</h2>
 							<p>Don't run as root</p>
-							<br><emp>If credentials are stolen, you don't want them to be root.</emp>
+							<emp>If credentials are stolen, you don't want them to be root.</emp>
+							<img src="./img/nicki_snap.gif" alt="clef">
+					</section>
+					<section>
+						<h2>Databases</h2>
+						<p>Minimize accesses.</p>
+						<special-small>Try to design your application to only get/push data when necessary.</special-small>
+					</section>
+					<section>
+						<h4>Put a password on your database.</h4>
+						<p>Accesses from the application should use a <br><emp>low privilege user.</emp> </p>
+							<special-small>This prevents exploits from the app and if the server is compromised, it doesn't mean your database is compromised.</special-small>
 					</section>
 				</section>
 
