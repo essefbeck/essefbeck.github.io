@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Small Application Security</title>
+
+		<meta name="description" content="A checklist for individuals or smalls teams launching a project. Presentation using reveal-js.">
+		<meta name="author" content="Sarah Beck">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/pastel.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<!-- backgrounds for presentation:
+		E5CDE3 - pink
+		C2F5E7 - teal
+		BEE1F1 - blue
+
+		text:
+		66B6A1 - dark teal
+		C4A1C1 - dark pink
+	-->
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Small Application Security</h1>
+					<h3>An intro for developers.</h3>
+					<p>
+						<special-small><font color="#C4A1C1">Sarah Beck</font> <a href="http://twitter.com/sarah_bytes">@sarah_bytes</a></special-small>
+					</p>
+				</section>
+
+				<!-- introduction -->
+				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
+					<h2>Introduction</h2>
+					<p>Hello, my name is Sarah.</p>
+					<p> I'm an online programmer at <font color="#FF0000"><b>Motive</b></font>, Electronic Arts.</p>
+					<special-small>I like infosec, video games, and cats!</special-small>
+				</section>
+
+				<!-- Who is this talk for? -->
+				<section>
+						<h2>Who is this talk for?</h2>
+						<p>Developers planning on launching a <b>small</b> web application.</p>
+						 <p>The material can be expanded...</p>
+						 <p> <emp>but the bigger the dog the more effort to bathe it.</emp></p>
+				</section>
+
+				<!-- Why is this important? -->
+				<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
+					<h2>Why is this important?</h2>
+						<p>Applications often collect <emp>personal identifiable information (PID).</emp></p>
+						<p><special-small-neg>This can put people using your app at risk if that information is exposed.</special-small-neg></p>
+
+						<footer><small>* Personal Identifiable Information (PID) or sensitive personal information (SPI) - as used in information security and privacy laws, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context.</small></footer>
+				</section>
+
+				<!-- Summary -->
+				<section>
+					<h2>Data is a precious currency.</h2>
+					<img src="./img/nicki_secrets.gif" alt="secrets">
+				</section>
+
+				<!-- Example - gateway to tech-->
+				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
+					<section>
+					<h2>Example: Dog Spotting App</h2>
+					<p> We want an app records data on dogs you see in the city.</p>
+					<footer-img><img src="./img/clef.gif" alt="secrets"></footer-img>
+					</section>
+					<section>
+						<h2>What information do we need?</h2>
+						<ul>
+							<li>user info so the app can "remember" you</li>
+							<li>dog type (big, med, small)</li>
+							<li>dog rating</li>
+						</ul>
+					</section>
+					<section>
+						<h4>Hard mode</h4>
+						<p>The data I've selected makes this app much easier than it can be. 
+							<br><emp-neg>Imagine the privacy concerns for taking photos and recording locations of dogs.</emp-neg>
+							<br>Adding these features would make sharing very dangerous
+							<br>and a leak could release location data or images of dog owners in the city.</p>
+					</section>
+				</section>
+
+				<!-- Technology Section -->
+				<section>
+					<h2>Let's talk about Tech</h2>
+				</section>
+
+				<section>
+					<section>
+					<h2>Authentication</h2>
+					<p>This means usernames and passwords.</p>
+					<p><special-small>Passwords should be <b>hashed</b> and <b>salted</b> before they're stored in your database.</special-small></p>
+					<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
+					</section>
+					<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
+						<h2>Hashing</h2>
+						<p>Hashing is using a function (etc. MD5, SHA-1) to convert a password to a hash.</p>
+						<p><special-small>password = catsareamazing <br> MD5 hash = 4d8947153c9aac031b2fceedd586115e</special-small></p>
+					</section>
+					<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
+						<h2>Salting</h2>
+						<p>Salting suplements the password with other data so the hash cannot be easily converted back to the plain-text state.</p>
+						<special-small-neg>A new salt is randomly generated for each password.
+							<br>Salts do not have to be human readable.
+							<br>Salts should be long and different for every user.
+						</special-small-neg>
+						<special-small>
+							password = catsareamazing + QxLUF1bgIAdeQX <br> MD5 hash = 157d84489080694863660330e59eecfb
+						</special-small>
+					</section>
+					<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
+						<h4>Account registration and login in a hash-based system:</h4>
+						<ol>
+							<li>Password is hashed and stored in the database. At no point is the plain-text password ever written to the hard drive.</li>
+							<li>User tries to login, the hash of the password they entered is checked against the hash of their real password (in the database).</li>
+							<li>If hashes match, the user is granted access. If not, the user is told they entered invalid login credentials.</li>
+						</ol>
+						<footer><small>*Referenced from <a href="https://crackstation.net/hashing-security.htm">Crackstation.net</a></small></footer>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>HTTP versus HTTPS</h2>
+						<p>HTTP is unencrypted traffic, HTTPS is "secure" HTTP.
+						<br>HTTPS is used to protect confidential transactions like <emp>online banking and online shopping order forms.</emp>
+						<special-small>If you're not using HTTPS anyone can see the traffic you're sending to the server.</special-small>
+						</p>
+						<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
+					</section>
+					<section data-transition="slide" data-background="#BEE1F1" data-background-transition="zoom">
+						<h4>You can control what traffic can be seen from your app.</h4>
+						<p>Think about the data you're sending.
+						<special-small-neg>location data, credit card numbers, passwords.</special-small-neg></p>
+						<img src="./img/nicki_makeup.gif" alt="i'm an optical illusion">
+					</section>
+				</section>
+
+				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
+					<section>
+						<h2>Storing User Data</h2>
+						<p>Lets talk about servers.</p>
+						<p><special-small>If users do not need to login to your app, you don't need a server. 
+						</special-small></p>
+						<footer-img><img src="./img/clef.gif" alt="clef"></footer-img>
+					</section>
+					<section>
+						<h4>Cut down on the information you store</h4>
+							<p>Avoid storing birthdays, SINs, ages, gender, and anything else you don't <emp-neg>need</emp-neg>.</p>
+							<img src="./img/nicki_nope.gif" alt="clef">
+					</section>
+					<section>
+						<h2>Secure your Database</h2>
+						<ul>
+							<li>Where is the machine it's running on?</li>
+							<li>Who has access?</li>
+							<li>Is the database password protected?</li>
+							<li>Do you store data and authenticate users on the same machine?</li>
+						</ul>
+					</section>
+				</section>
+
+				<!-- I dont want to write this section
+			
+				<section data-transition="slide" data-background="#C2F5E7" data-background-transition="zoom">
+					<h4>Understanding attacks helps you protect against them!</h4>	
+					<img src="./img/nicki_come.gif" alt="come at me">
+				</section>
+
+				<section>
+					<h2>Some Common Exploits</h2>
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</section>
+				<section>
+					<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
+						
+					</section>
+					<section data-transition="slide" data-background="#E5CDE3" data-background-transition="zoom">
+						
+					</section>
+				</section>
+				-->
+
+				<!-- Questions -->
+				<section data-background="./img/smile_cat.gif">
+					<h2>Questions!</h2>
+					<p><special-small>Twitter: <a href="http://twitter.com/sarah_bytes">@sarah_bytes</a></special-small></p>
+					<p><special-small-neg>slides made with <a href="https://revealjs.com">reveal.js</a></special-small-neg></p>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
